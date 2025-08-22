@@ -6,6 +6,14 @@ export function Game() {
   const [playerHealth, setPlayerHealth] = useState(10);
   const [enemyHealth, setEnemyHealth] = useState(10);
 
+  function playCard(card: typeof cards[number]){
+    if(card.type == "attack"){
+        setEnemyHealth(h => Math.max(0, h - card.power))
+    }else if(card.type == "heal"){
+        setPlayerHealth(h => Math.max(10, h + card.power))
+    }
+  }
+
   return (
     <div className="border-2 border-blue-200 rounded-lg p-4 text-black bg-white">
       <p>Player Health: {playerHealth}</p>
@@ -13,7 +21,7 @@ export function Game() {
 
       <div className="flex gap-4 flex-wrap">
         {cards.map((card) => (
-          <div key={card.id} className="cursor-pointer">
+          <div key={card.id} onClick={() => playCard(card)} className="cursor-pointer">
             <CardComponent card={card} />
           </div>
         ))}
