@@ -4,6 +4,7 @@ export interface Card {
     id: number;
     name: string;
     type: CardType;
+    power: number;
     description: string;
 }
 
